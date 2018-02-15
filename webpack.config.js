@@ -12,7 +12,10 @@ module.exports = {
                     presets: ['env','react'],
                     plugins: ['transform-object-rest-spread']
                 }
-            }
+            },
+            // { 
+            //     test: /(\.css)$/, loaders: ['style', 'css'] 
+            // },
         ]
     },
     plugins: [
