@@ -1,5 +1,5 @@
 {
-  "name": "redux-messenger",
+  "name": "pluralsight-advanced-redux",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -33,7 +33,18 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Darmaiad",
+  "keywords": [
+    "react",
+    "redux",
+    "react-redux",
+    "es6",
+    "reactjs",
+    "javascript"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Darmaiad/pluralsight-advanced-redux.git"
+  }
 }
