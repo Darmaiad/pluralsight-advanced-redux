@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const App = ()=>(
+export const App = () => (
     <div>
         <h1>
             Redux Messenger

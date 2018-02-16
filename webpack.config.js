@@ -38,7 +38,7 @@ export default {
         "index": [
             'babel-regenerator-runtime',
             'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-            './src/main',
+            './src/index',
         ]
     },
     output: {
