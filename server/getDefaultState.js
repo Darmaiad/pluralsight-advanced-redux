@@ -1,45 +1,45 @@
-import { fromJS } from 'immutable'
+import { fromJS } from 'immutable';
 
 import {
     User,
     channels,
-    Channel
+    Channel,
 } from './db';
 
 export const getDefaultState = (currentUser)=>{
-
     const defaultState = {
-        currentUser:{},
-        channels:[],
-        userInfo:[],
+        currentUser: {},
+        channels: [],
+        userInfo: [],
     };
 
-    const userChannels = channels.filter(channel=>channel.participants.includes(currentUser.id));
-    const activeChannel = Channel(currentUser.activeChannel);
+    const userChannels = channels.filter((channel)=>channel.participants.includes(currentUser.id));
+    /* eslint-disable new-cap */
+    const activeChannel = Channel(currentUser.activeChannel); 
     defaultState.currentUser = currentUser;
-    defaultState.channels = userChannels.map(channel=>{
+    defaultState.channels = userChannels.map((channel)=>{
         if (channel.id === activeChannel.id) {
             return {
                 ...channel,
-                fetchStatus:`FETCHED`
+                fetchStatus: `FETCHED`,
             };
         } else {
             return {
-                id:channel.id,
-                name:channel.name,
-                messages:[],
-                fetchStatus:`NOT_FETCHED`,
-                participants:channel.participants
-            }
+                id: channel.id,
+                name: channel.name,
+                messages: [],
+                fetchStatus: `NOT_FETCHED`,
+                participants: channel.participants,
+            };
         }
     });
 
     defaultState.activeChannel = activeChannel.id;
-    defaultState.userInfo = [currentUser,...activeChannel.participants.map(User), ...currentUser.contacts.map(User)].map(user=>({
-        name:user.name,
-        fetchStatus:`FETCHED`,
-        id:user.id,
-        status:user.status
+    defaultState.userInfo = [currentUser, ...activeChannel.participants.map(User), ...currentUser.contacts.map(User)].map((user)=>({
+        name: user.name,
+        fetchStatus: `FETCHED`,
+        id: user.id,
+        status: user.status,
     }));
 
     return fromJS(defaultState);

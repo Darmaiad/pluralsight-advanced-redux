@@ -32,6 +32,8 @@
     "babel-regenerator-runtime": "^6.5.0",
     "babel-register": "^6.26.0",
     "eslint": "^4.17.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.6.1",
     "express": "^4.16.2",

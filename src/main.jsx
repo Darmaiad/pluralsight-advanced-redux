@@ -1,6 +1,6 @@
 import React from 'react';
-import reactDOM from 'react-dom'
-import {getStore} from './getStore';
+import reactDOM from 'react-dom';
+import { getStore } from './getStore';
 import { App } from './App';
 
 const store = getStore();

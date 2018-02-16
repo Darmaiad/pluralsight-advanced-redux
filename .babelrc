@@ -1,4 +1,4 @@
 {
   "presets": ["env","react"],
-  "plugins": ["transform-regenerator","transform-object-rest-spread"]
+  "plugins": ["transform-regenerator", "transform-object-rest-spread"]
 }
