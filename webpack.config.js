@@ -1,6 +1,7 @@
-const webpack = require('webpack');
-const path = require('path');
-module.exports = {
+import webpack from 'webpack';
+import path from 'path';
+
+export default {
     module: {
         loaders: [
             {
