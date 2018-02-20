@@ -94,6 +94,7 @@
     "object-curly-spacing": [
       1,
       "always"
-    ]
+    ],
+    "require-jsdoc": 0
   }
 }

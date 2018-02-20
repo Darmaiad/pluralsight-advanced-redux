@@ -1,9 +1,46 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import { users } from './../server/db';
 import { getDefaultState } from './../server/getDefaultState';
 import { initializeDB } from './../server/db/initializeDB';
+import { createSocketMiddleware } from './socketMiddleware';
+import { RECEIVE_MESSAGE } from './actions/index';
+
+// We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
+const io = window.io;
+
+// Configuration for sockets
+//  -- Configuation for when something happens in the App and data goes out (basically an action creator):
+const socketConfigOut = {
+    UPDATE_STATUS: (data) => ({
+        type: 'UPDATE_USER_STATUS',
+        status: data,
+    }),
+};
+
+// Create out middleware:
+const socketMiddleware = createSocketMiddleware(io)(socketConfigOut);
+
+//  -- Configuation for when something comes from the server (basically an action creator):
+const socketConfigIn = {
+    NEW_MESSAGE: (data) => ({
+        type: 'RECEIVE_MESSAGE',
+        message: data,
+    }),
+};
+
+// New socket for listening to server events
+const socket = io();
+
+// Listen to events that come in from the server
+/* eslint-disable guard-for-in */
+for (const key in socketConfigIn) {
+    socket.on(
+        key, 
+        (data) => store.dispatch(socketConfigIn[key](data))
+    );
+}
 
 initializeDB();
 
@@ -21,10 +58,17 @@ const defaultState = getDefaultState(currentUser);
 // console.log(defaultState);
 
 const middlewares = [];
+middlewares.push(socketMiddleware);
 // Run ONLY if environment is DEV:
 middlewares.push(logger);
 middlewares.push(reduxImmutableStateInvariant());
 
-const store = createStore(reducer, defaultState, applyMiddleware(...middlewares));
+const enhancer = compose(
+    applyMiddleware(
+        ...middlewares
+    )
+);
+
+const store = createStore(reducer, defaultState, enhancer);
 
 export const getStore = () => store;
