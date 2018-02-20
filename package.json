@@ -1,8 +1,7 @@
 {
   "name": "pluralsight-advanced-redux",
   "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.js",
+  "description": "Re-implementation of the project developed in the Pluralsight course: \"Advanced Redux\" by Daniel Stern.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node server/server.js",
@@ -53,6 +52,7 @@
     "reactjs",
     "javascript"
   ],
+  "main": "./src/index.js",
   "license": "ISC",
   "repository": {
     "type": "git",
