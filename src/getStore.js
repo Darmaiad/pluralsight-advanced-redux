@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import { users } from './../server/db';
 import { getDefaultState } from './../server/getDefaultState';
 import { initializeDB } from './../server/db/initializeDB';
@@ -18,6 +20,11 @@ const defaultState = getDefaultState(currentUser);
 //  - temp1.toJS();
 // console.log(defaultState);
 
-const store = createStore(reducer, defaultState);
+const middlewares = [];
+// Run ONLY if environment is DEV:
+middlewares.push(logger);
+middlewares.push(reduxImmutableStateInvariant());
+
+const store = createStore(reducer, defaultState, applyMiddleware(...middlewares));
 
 export const getStore = () => store;

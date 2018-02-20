@@ -6,14 +6,10 @@ import { App } from './App';
 
 const store = getStore();
 
-const Index = () => (
-    <App />
-);
-
 const render = (store) => {
     reactDOM.render(
         <div>
-            <Index state={store.getState()} />
+            <App state={store.getState()} />
         </div>,
         document.getElementById('AppContainer'));
 };

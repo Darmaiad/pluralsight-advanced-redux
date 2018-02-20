@@ -4,16 +4,13 @@ import cors from 'cors';
 import webpack from 'webpack';
 import webpackConfig from './../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
-const compiler = webpack(webpackConfig);
 import webpackHotMiddleware from "webpack-hot-middleware";
+import open from 'open';
+import { channels } from './db/Channel';
+import { users } from './db/User';
 
-import {
-    channels,
-} from './db/Channel';
-
-import {
-    users,
-} from './db/User';
+/* eslint-disable no-console */
+const compiler = webpack(webpackConfig);
 
 let app = express();
 const server = http.createServer(app);
@@ -111,6 +108,11 @@ app.use(express.static('public'));
 app.use(express.static('public/css'));
 
 const port = 9000;
-server.listen(port, () => {
-    console.info(`Redux Messenger is listening on port ${port}.`);
+server.listen(port, (err) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.info(`Redux Messenger is listening on port ${port}.`);
+        open(`http://localhost:${port}`);
+    }
 });
