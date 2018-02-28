@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import ContactListItemContainer from './ContactListItemContainer';
 
@@ -17,7 +18,7 @@ const ContactList = ({ contacts, name, openConversation }) => (
 );
 
 ContactList.propTypes = {
-    contacts: PropTypes.object.isRequired,
+    contacts: ImmutablePropTypes.list.isRequired,
     name: PropTypes.string.isRequired,
     openConversation: PropTypes.func.isRequired,
 };

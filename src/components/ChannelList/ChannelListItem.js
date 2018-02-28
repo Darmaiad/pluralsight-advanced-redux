@@ -6,9 +6,7 @@ const ChannelListItem = ({ id, name, setActiveChannel, isActive }) => {
     const handleOnClick = () => setActiveChannel(id);
 
     const className = classnames('list-group-item', { active: isActive });
-    return (
-        <a href="#" className={className} onClick={handleOnClick}>{name}</a>
-    );
+    return <a href="#" className={className} onClick={handleOnClick}>{name}</a>;
 };
 
 ChannelListItem.propTypes = {

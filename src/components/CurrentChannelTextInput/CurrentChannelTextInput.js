@@ -35,7 +35,6 @@ const CurrentChannelTextInput = ({ text = "", submitMessage, updateText, activeC
 
 CurrentChannelTextInput.propTypes = {
     text: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     activeChannel: PropTypes.string.isRequired,
     submitMessage: PropTypes.func.isRequired,
     updateText: PropTypes.func.isRequired,
@@ -44,4 +43,3 @@ CurrentChannelTextInput.propTypes = {
 };
 
 export default CurrentChannelTextInput;
-

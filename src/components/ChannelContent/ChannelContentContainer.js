@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import ChannelContent from './ChannelContent';
 
 const mapStateToProps = (state) => {
-    const channels = state.get(`channels`);
-    const activeChannel = state.get(`activeChannel`);
-    const channel = channels.find((channel) => channel.get(`id`) === activeChannel);
+    // Get the active channel data
+    const channel = state.get(`channels`).find( (channel) => channel.get(`id`) === state.get(`activeChannel`));
 
     return {
         messages: channel.get(`messages`),

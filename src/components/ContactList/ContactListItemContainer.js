@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 
 import ContactListItem from './ContactListItem';
 
-const mapStateToProps = (state, { id }) => {
+const mapStateToProps = (state, { id }) => { // Destructuring of ownProps.id
     // todo... add selector here
     const contact = fromJS({
         name: id,

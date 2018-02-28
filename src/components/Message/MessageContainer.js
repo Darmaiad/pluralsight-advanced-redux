@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Message from './Message';
 
-// {message} is ownProps
+// {message} is destructuring of ownProps.message
 const mapStateToProps = (state, { message }) => ({
     text: message.get(`content`).get(`text`),
     owner: {
