@@ -6,18 +6,18 @@ import {
     Channel,
 } from './db';
 
-export const getDefaultState = (currentUser)=>{
+export const getDefaultState = (currentUser) => {
     const defaultState = {
         currentUser: {},
         channels: [],
         userInfo: [],
     };
 
-    const userChannels = channels.filter((channel)=>channel.participants.includes(currentUser.id));
+    const userChannels = channels.filter((channel) => channel.participants.includes(currentUser.id));
     /* eslint-disable new-cap */
-    const activeChannel = Channel(currentUser.activeChannel); 
+    const activeChannel = Channel(currentUser.activeChannel);
     defaultState.currentUser = currentUser;
-    defaultState.channels = userChannels.map((channel)=>{
+    defaultState.channels = userChannels.map((channel) => {
         if (channel.id === activeChannel.id) {
             return {
                 ...channel,
@@ -35,7 +35,7 @@ export const getDefaultState = (currentUser)=>{
     });
 
     defaultState.activeChannel = activeChannel.id;
-    defaultState.userInfo = [currentUser, ...activeChannel.participants.map(User), ...currentUser.contacts.map(User)].map((user)=>({
+    defaultState.userInfo = [currentUser, ...activeChannel.participants.map(User), ...currentUser.contacts.map(User)].map((user) => ({
         name: user.name,
         fetchStatus: `FETCHED`,
         id: user.id,

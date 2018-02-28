@@ -1,1 +1,3 @@
-export { CurrentUSerContainer}
+export { CurrentUserContainer };
+
+export { ChannelContentContainer };

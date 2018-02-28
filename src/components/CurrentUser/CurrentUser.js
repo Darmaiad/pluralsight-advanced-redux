@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ONLINE, OFFLINE, AWAY } from './../../actions';
 
-export const CurrentUser = ({ name, status, id, updateStatus }) => (
+const CurrentUser = ({ name, status, id, updateStatus }) => (
     <div>
         <div>
             <h3>
@@ -25,3 +25,5 @@ CurrentUser.propTypes = {
     id: PropTypes.string.isRequired,
     updateStatus: PropTypes.func.isRequired,
 };
+
+export default CurrentUser;

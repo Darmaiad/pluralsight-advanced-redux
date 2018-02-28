@@ -10,6 +10,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "chance": "^1.0.6",
+    "classnames": "^2.2.5",
     "cors": "^2.8.1",
     "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
@@ -52,6 +53,7 @@
     "react",
     "redux",
     "react-redux",
+    "immutablejs",
     "es6",
     "reactjs",
     "javascript"

@@ -1,22 +1,26 @@
 import { connect } from 'react-redux';
-import { CurrentUser } from './CurrentUser';
+import CurrentUser from './CurrentUser';
 
 const mapStateToProps = (state) => {
-    const currenUser = state.get('currentUSer');
+    // Preferably pass immutable objects 
+    const currentUser = state.get('currentUser');
     return {
-        name: currenUser.get('name'),
-        status: currenUser.get('status'),
-        id: currenUser.get('id'),
+        name: currentUser.get('name'),
+        status: currentUser.get('status'),
+        id: currentUser.get('id'),
     };
 };
 
 const mapdispatchToProps = (dispatch) => ({
+    // Destructuring event.target.value
     updateStatus: ({ target: { value } }) => {
         console.log('updating status: ', value);
     },
 });
 
-export const CurrentUserContainer = connect(
+const CurrentUserContainer = connect(
     mapStateToProps,
     mapdispatchToProps
 )(CurrentUser);
+
+export default CurrentUserContainer;
