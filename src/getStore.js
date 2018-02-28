@@ -1,11 +1,13 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+
 import { users } from './../server/db';
 import { getDefaultState } from './../server/getDefaultState';
 import { initializeDB } from './../server/db/initializeDB';
 import { createSocketMiddleware } from './socketMiddleware';
 import { RECEIVE_MESSAGE } from './actions/index';
+import { getPreloadedState } from './getPreloadedState';
 
 // We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
 const io = window.io;
@@ -37,7 +39,7 @@ const socket = io();
 /* eslint-disable guard-for-in */
 for (const key in socketConfigIn) {
     socket.on(
-        key, 
+        key,
         (data) => store.dispatch(socketConfigIn[key](data))
     );
 }
@@ -49,7 +51,7 @@ const reducer = (state) => state;
 // Represents the currently "logged in" user. Could be any one from the array 
 const currentUser = users[0];
 
-const defaultState = getDefaultState(currentUser);
+// const defaultState = getDefaultState(currentUser); // We now use the preLoadedState instead
 
 // Immutable.js maps appear in a not helpful way in the browser console
 //  - right-click, store as a local variable
@@ -69,6 +71,6 @@ const enhancer = compose(
     )
 );
 
-const store = createStore(reducer, defaultState, enhancer);
+const store = createStore(reducer, getPreloadedState(), enhancer);
 
 export const getStore = () => store;

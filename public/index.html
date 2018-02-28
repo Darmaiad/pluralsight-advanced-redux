@@ -10,9 +10,19 @@
 </head>
 
 <body>
+    <!-- 
+        Whatever is in the AppContainer div will be overwritten when React loads but until it loads, it will show whatever is inside. 
+        If the entire app is server-rendered inside the div, React will be smart enough to graft inside the HTML when it loads. 
+    -->
     <div id="AppContainer" class="container">
+        <div>
+            <%= html %>
+        </div>
 
     </div>
+    <script>
+        window.__PRELOADED_STATE__ = <%= preloadedState %>;
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/assets/index.bundle.js"></script>
 

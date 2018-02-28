@@ -7,9 +7,11 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from "webpack-hot-middleware";
 import open from 'open';
 import socketIO from 'socket.io';
+
+import { handleRender } from './serverRenderMiddleware';
+import { getDefaultState } from './getDefaultState';
 import { channels } from './db/Channel';
 import { users } from './db/User';
-
 
 /* eslint-disable no-console */
 const compiler = webpack(webpackConfig);
@@ -31,7 +33,6 @@ app.use(webpackHotMiddleware(compiler, {
     'heartbeat': 10 * 1000,
 }));
 
-import { getDefaultState } from './getDefaultState';
 import { initializeDB } from './db/initializeDB';
 
 initializeDB();
@@ -108,8 +109,11 @@ app.use('/input/submit/:userID/:channelID/:messageID/:input', ({ params: { userI
     res.status(300).send();
 });
 
-app.use(express.static('public'));
 app.use(express.static('public/css'));
+// app.use(express.static('public')); // Useless when server-side rendering
+app.use('/', handleRender( () => {
+    return getDefaultState(currentUser);
+})); // We use this line instead
 
 const port = 9000;
 server.listen(port, (err) => {
