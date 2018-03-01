@@ -1,5 +1,8 @@
+import React from 'react';
 import { connect } from 'react-redux';
+
 import CurrentUser from './CurrentUser';
+import { updateStatus } from './../../actions';
 
 const mapStateToProps = (state) => {
     // Preferably pass immutable objects 
@@ -13,9 +16,7 @@ const mapStateToProps = (state) => {
 
 const mapdispatchToProps = (dispatch) => ({
     // Destructuring event.target.value
-    updateStatus: ({ target: { value } }) => {
-        console.log('updating status: ', value);
-    },
+    updateStatus: ({ target: { value } }) => dispatch(updateStatus(value)),
 });
 
 const CurrentUserContainer = connect(

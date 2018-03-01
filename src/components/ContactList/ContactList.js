@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import ContactListItemContainer from './ContactListItemContainer';
 
-const ContactList = ({ contacts, name, openConversation }) => (
+const ContactList = ({ contacts, name }) => (
     <div>
         <div>
             <h3>{name}'s Contacts</h3>
@@ -20,7 +20,6 @@ const ContactList = ({ contacts, name, openConversation }) => (
 ContactList.propTypes = {
     contacts: ImmutablePropTypes.list.isRequired,
     name: PropTypes.string.isRequired,
-    openConversation: PropTypes.func.isRequired,
 };
 
 export default ContactList;

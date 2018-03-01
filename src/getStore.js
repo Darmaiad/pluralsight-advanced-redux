@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import thunk from 'redux-thunk';
 
 import { users } from './../server/db';
 import { getDefaultState } from './../server/getDefaultState';
@@ -46,23 +47,24 @@ for (const key in socketConfigIn) {
 
 initializeDB();
 
-const reducer = (state) => state;
+import { reducer } from './reducers';
 
 // Represents the currently "logged in" user. Could be any one from the array 
 const currentUser = users[0];
 
 // const defaultState = getDefaultState(currentUser); // We now use the preLoadedState instead
+// console.log(defaultState);
 
 // Immutable.js maps appear in a not helpful way in the browser console
 //  - right-click, store as a local variable
 //  - the name it was saved is logged on the screen, e.g temp1
 //  - temp1.toJS();
-// console.log(defaultState);
 
 const middlewares = [];
+middlewares.push(thunk);
 middlewares.push(socketMiddleware);
 // Run ONLY if environment is DEV:
-middlewares.push(logger);
+// middlewares.push(logger);
 middlewares.push(reduxImmutableStateInvariant());
 
 const enhancer = compose(
