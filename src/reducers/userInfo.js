@@ -8,21 +8,21 @@ import {
 
 export const userInfo = createReducer(null, {
     [UPDATE_USER_FETCH_STATUS](state, action) {
-        const index = state.findIndex((user)=>user.get(`id`) === action.id);
+        const index = state.findIndex((user)=>user.get('id') === action.id);
         if (index === -1) {     
             /* eslint-disable new-cap */
             return state.push(Map({
                 id: action.id,
                 fetchStatus: action.status,
-                name: `[...]`,
+                name: '[...]',
             }));
         } else {
-            return state.setIn([index, `fetchStatus`], action.status);
+            return state.setIn([index, 'fetchStatus'], action.status);
         }
     },
     [SET_USER_INFO](state, action) {
-        const index = state.findIndex((user)=>user.get(`id`) === action.user.get(`id`));
-        return state.set(index, action.user.set(`fetchStatus`, FETCHED));
+        const index = state.findIndex((user)=>user.get('id') === action.user.get('id'));
+        return state.set(index, action.user.set('fetchStatus', FETCHED));
     },
 
 });

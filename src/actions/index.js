@@ -12,6 +12,6 @@ export { openContactChannel } from './openContactChannel';
 export { requestCreateChannel, REQUEST_CREATE_CHANNEL } from './requestCreateChannel';
 export { completeChannelCreation, COMPLETE_CHANNEL_CREATION } from './completeChannelCreation';
 
-export const NOT_FETCHED = `NOT_FETCHED`;
-export const FETCHING = `FETCHING`;
-export const FETCHED = `FETCHED`;
+export const NOT_FETCHED = 'NOT_FETCHED';
+export const FETCHING = 'FETCHING';
+export const FETCHED = 'FETCHED';

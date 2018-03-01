@@ -11,9 +11,9 @@ import { Chance } from 'chance';
 const chance = new Chance();
 
 const messageActions =
-    [`collate`, `port`, `merge`, `refactor`, `check`, `deploy`, `automate`, `debug`, `erase`, `cache`, `rebase`, `transpile`, `desync`, `fork`];
+    ['collate', 'port', 'merge', 'refactor', 'check', 'deploy', 'automate', 'debug', 'erase', 'cache', 'rebase', 'transpile', 'desync', 'fork'];
 const messageObjects = 
-    [`repo`, `source code`, `code base`, `sprint`, `workflow`, `debugger`, `module`, `version`, `transpiler`, `language`, `integer`, `router`];
+    ['repo', 'source code', 'code base', 'sprint', 'workflow', 'debugger', 'module', 'version', 'transpiler', 'language', 'integer', 'router'];
 const templates = [
     `I'm going to <%= action%> the <%= object%>.`,
     `Could you <%= action%> the <%= object%>?`,
@@ -40,8 +40,8 @@ export const getRandomMessage = (userIDs) => ({
 });
 
 export const initializeDB = () => {
-    const firstNames = [`Emily`, `Chuck`, `Andy`, `Edgar`, `Stephen`, `Pablo`, `Gustav`, `Jackson`, `Leonardo`];
-    const lastNames = [`McCartney`, `Webber`, `Combs`, `John`, `Martin`, `Starr`, `Springstein`, `Simmons`, `Harrison`];
+    const firstNames = ['Emily', 'Chuck', 'Andy', 'Edgar', 'Stephen', 'Pablo', 'Gustav', 'Jackson', 'Leonardo'];
+    const lastNames = ['McCartney', 'Webber', 'Combs', 'John', 'Martin', 'Starr', 'Springstein', 'Simmons', 'Harrison'];
 
     let userCount = 12;
     while (userCount--) {
@@ -50,8 +50,8 @@ export const initializeDB = () => {
             id: chance.guid(),
             contacts: [],
             channels: [],
-            fetchStatus: `FETCHED`,
-            status: chance.pick([`ONLINE`, `OFFLINE`, `AWAY`]),
+            fetchStatus: 'FETCHED',
+            status: chance.pick(['ONLINE', 'OFFLINE', 'AWAY']),
         });
     }
 
@@ -92,7 +92,7 @@ export const initializeDB = () => {
 
     channels.push({
         id: chance.guid(),
-        name: `Group Chat`,
+        name: 'Group Chat',
         participants: users.map((user) => user.id),
         messages: getMessages(users.map((user) => user.id), 28),
     });

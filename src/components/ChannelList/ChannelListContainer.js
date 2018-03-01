@@ -5,8 +5,8 @@ import ChannelList from './ChannelList';
 import { setActiveChannel } from './../../actions/setActiveChannel';
 
 const mapStateToProps = (state) => ({
-    channels: state.get(`channels`),
-    activeChannel: state.get(`activeChannel`),
+    channels: state.get('channels'),
+    activeChannel: state.get('activeChannel'),
 });
 
 const mapDispatchToProps = (dispatch) => ({

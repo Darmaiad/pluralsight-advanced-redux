@@ -21,14 +21,14 @@ export const getDefaultState = (currentUser) => {
         if (channel.id === activeChannel.id) {
             return {
                 ...channel,
-                fetchStatus: `FETCHED`,
+                fetchStatus: 'FETCHED',
             };
         } else {
             return {
                 id: channel.id,
                 name: channel.name,
                 messages: [],
-                fetchStatus: `NOT_FETCHED`,
+                fetchStatus: 'NOT_FETCHED',
                 participants: channel.participants,
             };
         }
@@ -37,7 +37,7 @@ export const getDefaultState = (currentUser) => {
     defaultState.activeChannel = activeChannel.id;
     defaultState.userInfo = [currentUser, ...activeChannel.participants.map(User), ...currentUser.contacts.map(User)].map((user) => ({
         name: user.name,
-        fetchStatus: `FETCHED`,
+        fetchStatus: 'FETCHED',
         id: user.id,
         status: user.status,
     }));

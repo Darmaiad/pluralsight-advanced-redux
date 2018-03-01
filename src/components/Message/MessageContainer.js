@@ -6,11 +6,11 @@ import { userSelector } from './../../selectors';
 
 // {message} is destructuring of ownProps.message
 const mapStateToProps = (state, { message }) => {
-    const owner = userSelector(message.get(`owner`))(state);
+    const owner = userSelector(message.get('owner'))(state);
     return {
-        text: message.get(`content`).get(`text`),
+        text: message.get('content').get('text'),
         owner: {
-            name: owner.get(`fetchStatus`).includes(`FETCHED`) ? owner.get(`name`) : `[...]`,
+            name: owner.get('fetchStatus').includes('FETCHED') ? owner.get('name') : '[...]',
         },
     };
 };

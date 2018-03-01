@@ -13,14 +13,14 @@ import { createReducer } from './../utility';
 import { fromJS } from 'immutable';
 
 const receiveMessageHandler = (state, { message: { id, channelID, content, owner } }) => {
-    const index = state.findIndex((channel) => channel.get(`id`) === channelID);
+    const index = state.findIndex((channel) => channel.get('id') === channelID);
     if (index === -1) {
         return state;
     }
     let channel = state.get(index);
-    let messages = channel.get(`messages`);
+    let messages = channel.get('messages');
 
-    if (messages.map((message) => message.get(`id`)).includes(id)) {
+    if (messages.map((message) => message.get('id')).includes(id)) {
         return state;
     }
 
@@ -28,22 +28,22 @@ const receiveMessageHandler = (state, { message: { id, channelID, content, owner
         id, content, owner, date: new Date(),
     }));
 
-    return state.setIn([index, `messages`], newMessages);
+    return state.setIn([index, 'messages'], newMessages);
 };
 
 const requestCreateChannelHandler = (state, { ownID, contactID, channelID, channelName }) => {
     return state.push(fromJS({
         id: channelID,
         participants: [ownID, contactID],
-        fetchStatus: `FETCHING`,
+        fetchStatus: 'FETCHING',
         messages: [],
         name: channelName,
     }));
 };
 
 const completeChannelCreationHandler = (state, { channelID, success }) => {
-    const index = state.findIndex((channel) => channel.get(`id`) === channelID);
-    return state.setIn([index, `fetchStatus`], FETCHED);
+    const index = state.findIndex((channel) => channel.get('id') === channelID);
+    return state.setIn([index, 'fetchStatus'], FETCHED);
 };
 
 export const channels = createReducer(null, {
@@ -51,13 +51,13 @@ export const channels = createReducer(null, {
     [REQUEST_CREATE_CHANNEL]: requestCreateChannelHandler,
     [RECEIVE_MESSAGE]: receiveMessageHandler,
     [UPDATE_CHANNEL_INPUT_TEXT](state, action) {
-        const index = state.findIndex((channel) => channel.get(`id`) === action.channelId);
-        return state.setIn([index, `currentUserText`], action.text);
+        const index = state.findIndex((channel) => channel.get('id') === action.channelId);
+        return state.setIn([index, 'currentUserText'], action.text);
     },
     [SUBMIT_CHANNEL_INPUT_TEXT](state, action) {
-        const index = state.findIndex((channel) => channel.get(`id`) === action.channel);
+        const index = state.findIndex((channel) => channel.get('id') === action.channel);
         let channel = state.get(index);
-        let messages = channel.get(`messages`);
+        let messages = channel.get('messages');
         let id = action.id;
 
         let newMessages = messages.push(fromJS({
@@ -69,16 +69,16 @@ export const channels = createReducer(null, {
             date: new Date(),
         }));
 
-        let newState = state.setIn([index, `messages`], newMessages);
-        newState = newState.setIn([index, `currentUserText`], "");
+        let newState = state.setIn([index, 'messages'], newMessages);
+        newState = newState.setIn([index, 'currentUserText'], "");
         return newState;
     },
     [UPDATE_CHANNEL_FETCHED_STATUS](state, action) {
-        const index = state.findIndex((channel) => channel.get(`id`) === action.channel);
-        return state.setIn([index, `fetchStatus`], action.status);
+        const index = state.findIndex((channel) => channel.get('id') === action.channel);
+        return state.setIn([index, 'fetchStatus'], action.status);
     },
     [SET_CHANNEL_INFO](state, action) {
-        const index = state.findIndex((channel) => channel.get(`id`) === action.channel.get(`id`));
+        const index = state.findIndex((channel) => channel.get('id') === action.channel.get('id'));
         return state.set(index, action.channel);
     },
 });

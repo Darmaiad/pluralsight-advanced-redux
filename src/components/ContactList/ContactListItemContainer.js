@@ -10,9 +10,9 @@ const mapStateToProps = (state, { id }) => { // Destructuring of ownProps.id
     const contact = userSelector(id)(state);
 
     return {
-        name: contact.get(`name`),
-        id: contact.get(`id`),
-        status: contact.get(`status`),
+        name: contact.get('name'),
+        id: contact.get('id'),
+        status: contact.get('status'),
     };
 };
 

@@ -70,7 +70,7 @@ app.use('/user/:id', (req, res) => {
 });
 
 app.use('/status/:id/:status', ({ params: { id, status } }, res) => {
-    if (![`ONLINE`, `OFFLINE`, `AWAY`].includes(status)) {
+    if (!['ONLINE', 'OFFLINE', 'AWAY'].includes(status)) {
         return res.status(403).send();
     }
     const user = users

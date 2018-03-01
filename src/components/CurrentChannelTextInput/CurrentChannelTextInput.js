@@ -22,7 +22,7 @@ const CurrentChannelTextInput = ({ text = "", submitMessage, updateText, activeC
                         value={text}
                         type="text"
                         className="form-control"
-                        placeholder={(userStatus !== OFFLINE) ? `Say something` : `You are offline`}
+                        placeholder={(userStatus !== OFFLINE) ? 'Say something' : 'You are offline'}
                         onChange={handleChange}
                         disabled={fetchStatus !== FETCHED || userStatus === OFFLINE}
                     />
