@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import { users } from './../server/db';
 import { getDefaultState } from './../server/getDefaultState';
@@ -9,6 +10,7 @@ import { initializeDB } from './../server/db/initializeDB';
 import { createSocketMiddleware } from './socketMiddleware';
 import { RECEIVE_MESSAGE } from './actions/index';
 import { getPreloadedState } from './getPreloadedState';
+import {currentUserStatusSaga} from './sagas/currentUserStatusSaga';
 
 // We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
 const io = window.io;
@@ -28,7 +30,7 @@ const socketMiddleware = createSocketMiddleware(io)(socketConfigOut);
 //  -- Configuation for when something comes from the server (basically an action creator):
 const socketConfigIn = {
     NEW_MESSAGE: (data) => ({
-        type: 'RECEIVE_MESSAGE',
+        type: RECEIVE_MESSAGE,
         message: data,
     }),
 };
@@ -60,7 +62,10 @@ const currentUser = users[0];
 //  - the name it was saved is logged on the screen, e.g temp1
 //  - temp1.toJS();
 
+const sagaMiddleware = createSagaMiddleware();
+
 const middlewares = [];
+middlewares.push(sagaMiddleware); // On top of the Middleware list
 middlewares.push(thunk);
 middlewares.push(socketMiddleware);
 // Run ONLY if environment is DEV:
@@ -76,3 +81,5 @@ const enhancer = compose(
 const store = createStore(reducer, getPreloadedState(), enhancer);
 
 export const getStore = () => store;
+
+sagaMiddleware.run(currentUserStatusSaga);
