@@ -10,7 +10,7 @@ import { initializeDB } from './../server/db/initializeDB';
 import { createSocketMiddleware } from './socketMiddleware';
 import { RECEIVE_MESSAGE } from './actions/index';
 import { getPreloadedState } from './getPreloadedState';
-import {currentUserStatusSaga} from './sagas/currentUserStatusSaga';
+import { currentUserStatusSaga } from './sagas/currentUserStatusSaga';
 
 // We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
 const io = window.io;
