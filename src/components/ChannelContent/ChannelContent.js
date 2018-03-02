@@ -18,15 +18,7 @@ const ChannelContent = ({ messages, channelName, status, fetchStatus }) => (
                 :
                 null
         }
-        <div>
-            {
-                messages.map( (message) => (
-                    <div key={message.get('id')}>
-                        <MessageContainer message={message} />
-                    </div>
-                ))
-            }
-        </div>
+        <div>{messages.map((message) => <MessageContainer message={message} key={message.get('id')} />)}</div>
     </div>
 );
 

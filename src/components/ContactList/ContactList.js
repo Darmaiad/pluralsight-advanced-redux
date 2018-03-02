@@ -9,11 +9,7 @@ const ContactList = ({ contacts, name }) => (
         <div>
             <h3>{name}'s Contacts</h3>
         </div>
-        <div>
-            {contacts.map((contact) => (
-                <ContactListItemContainer key={contact} id={contact} />
-            ))}
-        </div>
+        <div>{contacts.map((contact) => <ContactListItemContainer key={contact} id={contact} />)}</div>
     </div>
 );
 

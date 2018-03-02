@@ -55,7 +55,10 @@
     "react",
     "redux",
     "react-redux",
+    "redux-saga",
     "immutablejs",
+    "server-side-rendering",
+    "reselect",
     "es6",
     "reactjs",
     "javascript"
