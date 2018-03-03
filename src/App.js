@@ -6,7 +6,7 @@ import ChannelContentContainer from './components/ChannelContent/ChannelContentC
 import ChannelListContainer from './components/ChannelList/ChannelListContainer';
 import ContactListContainer from './components/ContactList/ContactListContainer';
 import CurrentChannelTextInputContainer from './components/CurrentChannelTextInput/CurrentChannelTextInputContainer';
-
+import DevTools from './components/DevTools/DevTools';
 
 const App = () => (
     <div>

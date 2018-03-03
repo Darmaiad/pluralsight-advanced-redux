@@ -4,12 +4,16 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { getStore } from './getStore';
 import App from './App';
+import DevTools from './components/DevTools/DevTools';
 
 const store = getStore();
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <div>
+        <Provider store={store}>
+            <App />
+        </Provider>
+        <DevTools store={store} />
+    </div>,
     document.getElementById('AppContainer')
 );

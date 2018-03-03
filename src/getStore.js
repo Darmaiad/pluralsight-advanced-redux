@@ -12,6 +12,7 @@ import { RECEIVE_MESSAGE } from './actions/index';
 import { getPreloadedState } from './getPreloadedState';
 import { currentUserStatusSaga } from './sagas/currentUserStatusSaga';
 import { initSagas } from './initSagas';
+import DevTools from './components/DevTools/DevTools';
 
 // We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
 const io = window.io;
@@ -81,7 +82,8 @@ middlewares.push(reduxImmutableStateInvariant());
 const enhancer = compose(
     applyMiddleware(
         ...middlewares
-    )
+    ),
+    DevTools.instrument()
 );
 
 const store = createStore(reducer, getPreloadedState(), enhancer);
