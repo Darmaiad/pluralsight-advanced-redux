@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
@@ -11,6 +11,7 @@ import { createSocketMiddleware } from './socketMiddleware';
 import { RECEIVE_MESSAGE } from './actions/index';
 import { getPreloadedState } from './getPreloadedState';
 import { currentUserStatusSaga } from './sagas/currentUserStatusSaga';
+import { initSagas } from './initSagas';
 
 // We get a reference to the io by accessing it fromt he window.io, since we can only get it in our index.html
 const io = window.io;
@@ -64,12 +65,17 @@ const currentUser = users[0];
 
 const sagaMiddleware = createSagaMiddleware();
 
+// Transform logged to work with immutable.js data structures
+const logger = createLogger({
+    stateTransformer: (state) => state.toJS(),
+});
+
 const middlewares = [];
 middlewares.push(sagaMiddleware); // On top of the Middleware list
 middlewares.push(thunk);
 middlewares.push(socketMiddleware);
 // Run ONLY if environment is DEV:
-// middlewares.push(logger);
+middlewares.push(logger);
 middlewares.push(reduxImmutableStateInvariant());
 
 const enhancer = compose(
@@ -80,6 +86,7 @@ const enhancer = compose(
 
 const store = createStore(reducer, getPreloadedState(), enhancer);
 
-export const getStore = () => store;
+// Tell Saga Middleware to run the sagas. You need to run sagas after the Saga Middleware is applied.
+initSagas(sagaMiddleware);
 
-sagaMiddleware.run(currentUserStatusSaga);
+export const getStore = () => store;
