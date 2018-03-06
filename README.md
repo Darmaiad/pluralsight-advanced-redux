@@ -8,4 +8,4 @@ This project is based on the [Pluralsight](https://www.pluralsight.com/) course:
 * Run `npm run dev` to launch to the project.
   
 ## Description
-I updated the development environment of the project and created a production build. Other than that, this is basically coding along the instructor, with some code cleanup to match my preferences and some comments on tricky spots. 
+I created an updated development environment for the project. Other than that, this is basically coding along the instructor, with some code cleanup to match my preferences and some comments on spots I found tricky. 
