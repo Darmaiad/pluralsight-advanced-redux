@@ -7,7 +7,7 @@ This project is based on the [Pluralsight](https://www.pluralsight.com/) course:
 * Then, run `npm install` on the command line to download the dependencies. 
 * Finally, you can either:
   * Run `npm run dev` to launch to the project in development mode.
-  * Or run `npm run build` to launch the project in production mode
+  * Or run `npm run build` to launch the project in production mode.
 
 ## Description
 I updated the development environment of the project and created a production build. Other than that, this is basically coding along the instructor, with some code cleanup to match my preferences and some comments on tricky spots. 
